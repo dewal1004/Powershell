@@ -1,0 +1,40 @@
+Start-Transcript 
+
+Get-Command
+Get-Command -noun s*
+Get-Command -Noun SERVICE
+
+# Get the Service Object  
+Get-Service 
+Get-Help Get-Service  #get help on the object
+Get-Help Get-Service -example 
+Get-Service -online 
+
+Get-Alias cls   # get cls alias definition
+get-alias   # get all the aliasis
+
+# Objects Handling
+Get-Process
+Get-Process -Name Msedge  # get microsoft edge processes
+Get-Process -Name msedge | get-member   # get attrib/methods 
+
+Get-Process -Name explorer | Select-Object *  # list all the properties of the object
+Get-Process -Name Msedge | Select-Object * 
+
+Get-Help Select-Object -Examples
+# Select processes using the most memory 
+Get-Process | Sort-Object -Property WS | Select-Object -Last 5
+
+# Assign object to variable
+$Teclink = Get-Process Msedge 
+$Teclink   # confirm object has value 
+$Teclink.Name
+$Teclink | Get-Member
+$Teclink.Kill()   # kills the process
+
+Get-History  #list all called ps
+Stop-Transcript
+
+Get-Process | Select-Object -Property ProcessName, Id, WS, CPU 
+# Select objects by property and format the results -
+Get-Process Explorer | Select-Object -Property ProcessName -ExpandProperty Modules | Format-List
